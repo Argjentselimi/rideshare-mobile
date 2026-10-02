@@ -1,0 +1,104 @@
+:root {
+  color-scheme: dark;
+  --background: #0b1220;
+  --surface: #141f33;
+  --border: #8090aa;
+  --text: #edf2fc;
+  --muted: #b7c2d6;
+  --accent: #3548d4;
+  --accent-hover: #4d61ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: #89ddff;
+}
+
+main {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  color: #89ddff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trip-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.trip-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 18px;
+}
+
+.trip-card h2 {
+  margin-top: 0;
+}
+
+.trip-card p,
+.details p {
+  color: var(--muted);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  padding: 8px 14px;
+  color: white;
+  font: inherit;
+  text-decoration: none;
+}
+
+.action:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.action:disabled {
+  cursor: not-allowed;
+  background: #39455b;
+  color: #e4eaf4;
+}
+
+@media (max-width: 420px) {
+  main {
+    width: min(100% - 24px, 720px);
+    padding-top: 24px;
+  }
+}
