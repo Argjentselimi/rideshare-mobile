@@ -1,0 +1,30 @@
+# Java 5 - Hyrja me GitHub dhe ndryshimi me leje
+
+## Zbatimi
+
+- [x] NextAuth 4.24.15 dhe rruga e hyrjes me GitHub jane shtuar ne kod.
+- [x] Skema ruhet te aplikacioni/schema-java05.sql dhe u ekzekutua ne Neon.
+- [x] Neon konfirmoi ID 1 ne 08:00 me pronarin demo, ID 2 ne 08:15 pa pronar dhe ID 3 ne 07:45.
+- [x] Paneli lexon identitetin dhe rolin nga sesioni dhe Neon; ruajtja kontrollon rolin dhe pronarin ne server.
+- [x] OAuth App u krijua; konfigurimi lokal ruhet ne aplikacioni/.env.local, i perjashtuar nga Git. Sekretet nuk vendosen ne kete raport.
+- [x] Profili GitHub 251143822 u caktua shofer dhe pronar i udhetimit ID 2 ne Neon.
+
+## Provat
+
+Hyrja me GitHub u krye dhe paneli shfaqi profilin. Profili u caktua shofer/pronar ne Neon. Testet e ruajtjes per rastin e lejuar dhe te refuzuar jane ende ne pritje.
+
+### Prova 1 - Sesioni
+
+Hyrja me GitHub: u verifikua; paneli shfaqi ID 251143822. Rifreskimi dhe dalja nuk u testuan.
+
+### Prova 2 - Ruajtja e lejuar
+
+ID 2: Neon konfirmoi pronarin 251143822 dhe oren 08:15 pas caktimit. Veprimi per ndryshimin e ores nuk u testua ende.
+
+### Prova 3 - Refuzimi
+
+ID 1: refuzimi nepermjet formularit nuk u testua ende. Ora ne Neon mbeti 08:00; ID 2 mbeti 08:15 pas caktimit te pronarit.
+
+## Sekretet dhe ruajtja
+
+Sekretet qendrojne ne aplikacioni/.env.local, i cili perjashtohet nga Git. Kontrollo qe skedari te mos shfaqet ne GitHub Desktop.

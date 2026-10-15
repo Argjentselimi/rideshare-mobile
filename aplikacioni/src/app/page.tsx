@@ -1,9 +1,14 @@
+﻿import Link from "next/link";
+import { getServerSession } from "next-auth";
+import Hyrja from "@/components/Hyrja";
+import { authOptions } from "@/lib/auth";
 import { KartaUdhetimi } from "@/components/KartaUdhetimi";
 import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
   let udhetimet: Udhetim[];
   try {
     udhetimet = await lexoUdhetimet();
@@ -11,18 +16,22 @@ export default async function Home() {
     return (
       <main>
         <h1>RideShare</h1>
-        <p role="alert">Nuk u lidhëm me databazën. Provo përsëri.</p>
-        <a className="action" href="/">Provo përsëri</a>
+        <p><Hyrja brenda={Boolean(session)} /></p>
+        <p><Link href="/panel">Paneli im</Link></p>
+        <p role="alert">Nuk u lidhem me databazen. Provo perseri.</p>
+        <a className="action" href="/">Provo perseri</a>
       </main>
     );
   }
 
   return (
     <main>
-      <h1>RideShare · Udhëtimet për AAB</h1>
-      <p>Burimi: Neon · të dhëna fiktive për ushtrime</p>
+      <h1>RideShare - Udhetimet per AAB</h1>
+      <p><Hyrja brenda={Boolean(session)} /></p>
+        <p><Link href="/panel">Paneli im</Link></p>
+      <p>Burimi: Neon - te dhena fiktive per ushtrime</p>
       {udhetimet.length === 0 ? (
-        <p>Nuk ka udhëtime për momentin.</p>
+        <p>Nuk ka udhetime per momentin.</p>
       ) : (
         <div className="trip-list">
           {udhetimet.map((udhetim) => (
