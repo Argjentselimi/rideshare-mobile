@@ -102,3 +102,21 @@ h2 {
     padding-top: 24px;
   }
 }
+
+
+.offline-notice {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 16px 0 0;
+}
+
+.offline-notice p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+@media (max-width: 420px) {
+  .offline-notice {
+    width: min(100% - 24px, 720px);
+  }
+}
