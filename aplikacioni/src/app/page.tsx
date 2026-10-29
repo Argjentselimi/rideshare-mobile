@@ -31,7 +31,10 @@ export default async function Home() {
         <p><Link href="/panel">Paneli im</Link></p>
       <p>Burimi: Neon - te dhena fiktive per ushtrime</p>
       {udhetimet.length === 0 ? (
-        <p>Nuk ka udhetime per momentin.</p>
+        <>
+          <p>Nuk ka udhetime per momentin.</p>
+          <a className='action' href='/'>Rifresko listen</a>
+        </>
       ) : (
         <div className="trip-list">
           {udhetimet.map((udhetim) => (
