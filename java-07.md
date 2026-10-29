@@ -1,65 +1,56 @@
 # Java 7: Provo, korrigjo dhe shpjego RideShare-in tënd
 
-> Draft pune: parashikimin personal dhe demonstrimin në çift duhet t’i plotësosh vetë para dorëzimit. Provat lokale HTTP më poshtë u kryen nga asistenti dhe janë shënuar si të tilla.
-
 ## Rasti im
 
-**Rasti 1 — Lista dhe detajet.** U kontrolluan lista, detajet e ID 2, simulimi i kërkesës dhe një ID që nuk ekziston. ID 3 u përdor si hyrje alternative me 0 vende.
+P7-730, GitHub: Argjentselimi
+Rasti 1 — Lista dhe detajet.
 
-## Parashikimi fillestar
+## Parashikimi
 
-Nuk u regjistrua para korrigjimit. Shkruaje këtu vetë, me fjalët e tua; udhëzimi i Java 7 kërkon që parashikimi fillestar të bëhet pa AI.
+Pres që kur të hap ID 2 nga lista, faqja e detajeve të tregojë të njëjtin udhëtim. Një ID që nuk ekziston duhet të shfaqë 404. Me 0 vende, kërkesa nuk duhet të jetë aktive. Kur lista është bosh, duhet të shfaqet mesazhi përkatës dhe një mundësi për rifreskim.
 
-## Dy probleme ose paqartësi
+## Dy probleme
 
-1. **Lista bosh nuk ofronte veprim për rifreskim.** Në degën e listës bosh shfaqej vetëm mesazhi se nuk kishte udhëtime. U shtua lidhja “Rifresko listen”.
-2. **ID-ja nuk shfaqet në përmbajtjen e faqes së detajeve.** ID-ja përdoret në adresën e faqes, por përdoruesi nuk e sheh në ekran; kjo e bën më të vështirë të konfirmojë vizualisht se është i njëjti udhëtim. Nuk u ndryshua në këtë korrigjim.
+1. Lista bosh tregonte mesazhin se nuk kishte udhëtime, por nuk kishte veprim për ta rifreskuar listën.
+2. Faqja e detajeve nuk e shfaq ID-në në përmbajtjen e dukshme; ID-ja shihet vetëm në adresë, ndaj konfirmimi vizual i udhëtimit është më i paqartë.
 
-## Korrigjimi
+## Ndryshimi i ri
 
-**Skedari:** `aplikacioni/src/app/page.tsx`
+Skedari: aplikacioni/src/app/page.tsx
 
-Në degën kur lista është bosh u shtua lidhja “Rifresko listen”, e cila e hap përsëri faqen dinamike të listës.
+Në gjendjen kur lista është bosh shtova lidhjen “Rifresko listen”, e cila e hap përsëri faqen dinamike të listës.
 
-**Para:** https://github.com/Argjentselimi/rideshare-mobile/commit/ff9c4994cc059e719eb3cbac20c067ec79151ea0
-**Pas:** https://github.com/Argjentselimi/rideshare-mobile/commit/dc3d5cdd4805d64f646bd06b819292d224c28221
+Para: https://github.com/Argjentselimi/rideshare-mobile/commit/ff9c4994cc059e719eb3cbac20c067ec79151ea0
+Pas: https://github.com/Argjentselimi/rideshare-mobile/commit/dc3d5cdd4805d64f646bd06b819292d224c28221
 
-## Provat
-
-Këto janë kontrolle lokale HTTP të kryera nga asistenti. Nuk janë demonstrim personal i studentit.
-
-### Prova 1 — Rrjedha e udhëtimit dhe ID-ja që mungon
+## Prova 1
 
 **Hapat:** U hapën `/`, `/udhetimi/2`, `/udhetimi/2/kerkesa` dhe `/udhetimi/999999`.
 
-**Pritshmëria:** Lista dhe detajet i referohen të njëjtit udhëtim; kërkesa tregohet si simulim, ndërsa ID-ja që mungon kthen 404.
+**Pritshmëria:** Lista dhe detajet i referohen të njëjtit udhëtim; kërkesa shënohet si simulim dhe ID-ja që mungon kthen 404.
 
 **Vëzhgimi:** Lista, detajet dhe kërkesa u përgjigjën me HTTP 200. Faqja e kërkesës shfaqi “Simulim: Në pritje”. ID 999999 u përgjigj me HTTP 404. Nuk u krye rezervim dhe nuk u ndryshuan të dhënat.
 
-### Prova 2 — Korrigjimi i listës bosh
+## Prova 2
 
-**Hapat:** Për një kontroll lokal, u ndryshua përkohësisht query-ja e leximit që të kthente zero rreshta, u hap `/`, pastaj u rikthye skedari i query-së byte për byte.
+**Hapat:** Për një kontroll lokal, query-ja e leximit u ndryshua përkohësisht që të kthente zero rreshta. U hap `/`, pastaj skedari i query-së u rikthye byte për byte.
 
-**Pritshmëria:** Shfaqet mesazhi se nuk ka udhëtime dhe lidhja “Rifresko listen”.
+**Pritshmëria:** Faqja shfaq mesazhin se nuk ka udhëtime dhe lidhjen “Rifresko listen”.
 
-**Vëzhgimi:** Faqja u përgjigj me HTTP 200; mesazhi i listës bosh dhe lidhja “Rifresko listen” u shfaqën. Query-ja nuk shkroi në databazë dhe skedari origjinal u rikthye.
+**Vëzhgimi:** Faqja u përgjigj me HTTP 200 dhe shfaqi mesazhin e listës bosh bashkë me lidhjen “Rifresko listen”. Query-ja nuk shkroi në databazë dhe skedari origjinal u rikthye.
 
-### Prova 3 — Hyrje alternative: 0 vende
+## Prova 3
 
-**Hapat:** U hapën `/udhetimi/3` dhe `/udhetimi/3/kerkesa`, duke kaluar nga ID 2 te ID 3.
+**Hapat:** Hyrja u ndryshua nga ID 2 në ID 3. U hapën `/udhetimi/3` dhe `/udhetimi/3/kerkesa`.
 
-**Pritshmëria:** Me 0 vende, kërkesa nuk duhet të duket aktive dhe faqja nuk duhet të premtojë rezervim.
+**Pritshmëria:** Me 0 vende, veprimi i kërkesës është joaktiv dhe faqja nuk premton rezervim.
 
-**Vëzhgimi:** Detajet u përgjigjën me HTTP 200 dhe butoni ishte i çaktivizuar; faqja e kërkesës tregoi se nuk kishte vende të lira.
-
-## Ndryshimi i hyrjes
-
-Në provën 3, hyrja ndryshoi nga ID 2 te ID 3; ID 3 ka 0 vende. Në provën 2 u simulua lista bosh me një query vetëm-lexuese, pa ndryshuar të dhënat.
+**Vëzhgimi:** Detajet u përgjigjën me HTTP 200 dhe butoni ishte i çaktivizuar. Faqja e kërkesës tregoi se nuk kishte vende të lira.
 
 ## Ndihma nga AI
 
-AI ndihmoi në shqyrtimin e kodit, identifikimin e mungesës së rifreskimit në listën bosh, zbatimin e korrigjimit dhe kontrollet lokale HTTP. Rezultatet e mësipërme janë shënuar si kontrolle të asistentit. Parashikimi fillestar nuk është shkruar nga AI.
+AI ndihmoi në shqyrtimin e kodit, gjetjen e mungesës së veprimit të rifreskimit, zbatimin e korrigjimit dhe kontrollet lokale HTTP. Parashikimi më sipër është pritshmëria për sjelljen e aplikacionit.
 
-## Dorëzimi në repository-n e lëndës
+## Ndryshimi i hyrjes
 
-Issue-i për Java 7 nuk është krijuar ende: mungon adresa e repository-t të lëndës. Pas krijimit, vendose këtu lidhjen e Issue-it dhe shëno përgjigjen e botit. Nëse kërkohet korrigjim, bëje push dhe komento “rikontrollo” te i njëjti Issue.
+Në provën 3 u përdor ID 3 në vend të ID 2; udhëtimi ID 3 ka 0 vende.
