@@ -14,9 +14,14 @@ Pres që kur të hap ID 2 nga lista, faqja e detajeve të tregojë të njëjtin 
 1. Lista bosh tregonte mesazhin se nuk kishte udhëtime, por nuk kishte veprim për ta rifreskuar listën.
 2. Faqja e detajeve nuk e shfaq ID-në në përmbajtjen e dukshme; ID-ja shihet vetëm në adresë, ndaj konfirmimi vizual i udhëtimit është më i paqartë.
 
+## Ndryshimi i ri
+
+U shtua lidhja “Rifresko listen” në gjendjen kur lista nuk ka udhëtime.
+
 ## Korrigjimi (arsyeja)
 
-Arsyeja: Lista bosh nuk kishte veprim rifreskimi, ndaj përdoruesi nuk mund ta riprovonte ngarkimin nga ai ekran.
+Korrigjimi: U shtua lidhja “Rifresko listen” në gjendjen kur lista është bosh.
+Arsyeja: Pa këtë veprim, përdoruesi nuk mund ta riprovonte ngarkimin nga ekrani bosh.
 Skedari: aplikacioni/src/app/page.tsx
 
 Në gjendjen kur lista është bosh shtova lidhjen “Rifresko listen”, e cila e hap përsëri faqen dinamike të listës.
