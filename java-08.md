@@ -53,11 +53,11 @@ Gjendja e vendtakimit mbahet vetëm në `useState`; pas rifreskimit humbet. Prov
 
 ## Prova me një hyrje të re
 
-- **Hyrja që provova:** Pas konfirmimit të “Biblioteka”, shkrova “Parkingu” pa e konfirmuar, pastaj vendosa vetëm hapësira dhe shtypa “Konfirmo”. Këtë provë e bëra vetë lokalisht në Chrome headless, jo me koleg.
-- **Parashikimi im para klikimit:** `trim()` jep tekst bosh; shfaqet gabim dhe vendtakimi i mëparshëm “Biblioteka” mbetet i konfirmuar.
-- **Çfarë pashë realisht:** U shfaq gabimi për plotësimin e vendtakimit dhe zgjedhja e konfirmuar mbeti “Biblioteka”.
-- **Skedari dhe funksioni që e shpjegojnë:** `aplikacioni/src/components/ZgjedhVendtakimin.tsx`, funksioni `konfirmoVendtakimin`.
-- **Çfarë kuptova ose korrigjova:** Teksti në fushë dhe vendtakimi i konfirmuar janë dy gjendje të ndara; vlera bosh kthehet pa e zëvendësuar zgjedhjen. Prova me koleg duhet përsëritur në klasë.
+- Hyrja që provova: Në faqen lokale `/java-08-test`, konfirmova “Biblioteka”, shkrova “Parkingu” pa e konfirmuar, pastaj vendosa vetëm hapësira dhe shtypa “Konfirmo”. E provova vetë në Chrome headless, jo me koleg.
+- Parashikimi im para klikimit: `trim()` jep tekst bosh; shfaqet gabim dhe vendtakimi i mëparshëm “Biblioteka” mbetet i konfirmuar.
+- Çfarë pashë realisht: U shfaq gabimi për plotësimin e vendtakimit dhe zgjedhja e konfirmuar mbeti “Biblioteka”.
+- Skedari dhe funksioni që e shpjegojnë: `aplikacioni/src/components/ZgjedhVendtakimin.tsx`, funksioni `konfirmoVendtakimin`.
+- Çfarë kuptova ose korrigjova: Teksti në fushë dhe vendtakimi i konfirmuar janë dy gjendje të ndara; vlera bosh kthehet pa e zëvendësuar zgjedhjen. Prova me koleg duhet përsëritur në klasë.
 
 ## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
 
