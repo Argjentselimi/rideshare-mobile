@@ -139,6 +139,38 @@ h2 {
   padding-left: 12px;
 }
 
+.favorite-panel {
+  margin: 28px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 18px;
+}
+
+.favorite-panel h2 {
+  margin-top: 0;
+}
+
+.favorite-panel p {
+  color: var(--muted);
+}
+
+.favorite-count {
+  margin: 8px 0;
+  color: var(--text) !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.favorite-action {
+  cursor: pointer;
+}
+
+.favorite-message {
+  min-height: 1.5em;
+  margin-bottom: 0;
+}
+
 @media (max-width: 520px) {
   .location-secondary-action {
     margin-left: 0;
