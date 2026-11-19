@@ -8,7 +8,14 @@ import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
+  // The public trip list should still render if the OAuth secret/provider
+  // settings have not been added to the deployment yet.
+  let session = null;
+  try {
+    session = await getServerSession(authOptions);
+  } catch {
+    session = null;
+  }
   let udhetimet: Udhetim[];
   try {
     udhetimet = await lexoUdhetimet();
