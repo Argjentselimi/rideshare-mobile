@@ -4,6 +4,7 @@ import { gjejUdhetimin } from "@/lib/udhetimet";
 import { lexoGjendjenPreferimit } from "@/lib/preferimet";
 import PreferimiUdhetimit from "@/components/PreferimiUdhetimit";
 import ZgjedhVendtakimin from "@/components/ZgjedhVendtakimin";
+import GjendjaUdhetimit from "@/components/GjendjaUdhetimit";
 
 export const dynamic = "force-dynamic";
 
@@ -55,10 +56,8 @@ export default async function Detajet({
         <p>
           <strong>Vendtakimi i shoferit:</strong> {udhetim.vendtakimi}
         </p>
-        <p>
-          <strong>Vende të lira:</strong> {udhetim.vende}
-        </p>
       </div>
+      <GjendjaUdhetimit udhetimId={id} vendeFillestare={udhetim.vende} />
       {gabimPreferimi ? (
         <section className="favorite-panel" aria-labelledby="favorite-title">
           <h2 id="favorite-title">Të preferuarat</h2>
@@ -75,15 +74,6 @@ export default async function Detajet({
         />
       )}
       <ZgjedhVendtakimin />
-      {udhetim.vende > 0 ? (
-        <Link className="action" href={`/udhetimi/${id}/kerkesa`}>
-          Kërko vend
-        </Link>
-      ) : (
-        <button className="action" disabled>
-          Nuk ka vende të lira
-        </button>
-      )}
     </main>
   );
 }

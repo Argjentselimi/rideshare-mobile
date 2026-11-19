@@ -171,6 +171,69 @@ h2 {
   margin-bottom: 0;
 }
 
+.sync-panel {
+  margin: 28px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 18px;
+}
+
+.sync-panel h2,
+.sync-panel h3 {
+  margin-top: 0;
+}
+
+.sync-trip-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.sync-trip-summary p {
+  margin: 0 0 12px;
+}
+
+.seat-count {
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.request-list,
+.passenger-request {
+  margin-top: 18px;
+}
+
+.request-card {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.request-card p {
+  margin: 0 0 8px;
+}
+
+.request-status {
+  font-weight: 700;
+}
+
+.connection-status,
+.offline-action-note,
+.action-message {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.offline-action-note,
+.action-message[role="alert"] {
+  color: #ffd1c9;
+}
+
 @media (max-width: 520px) {
   .location-secondary-action {
     margin-left: 0;
