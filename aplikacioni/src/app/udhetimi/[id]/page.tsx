@@ -40,24 +40,9 @@ export default async function Detajet({
   }
 
   return (
-    <main>
+    <main className="trip-page">
       <Link href="/">← Kthehu te lista</Link>
-      <p className="eyebrow">Detajet e udhëtimit</p>
-      <h1>
-        {udhetim.nisja} – {udhetim.destinacioni}
-      </h1>
-      <div className="details">
-        <p>
-          <strong>Pika e nisjes:</strong> {udhetim.nisja}
-        </p>
-        <p>
-          <strong>Ora:</strong> {udhetim.ora}
-        </p>
-        <p>
-          <strong>Vendtakimi i shoferit:</strong> {udhetim.vendtakimi}
-        </p>
-      </div>
-      <GjendjaUdhetimit udhetimId={id} vendeFillestare={udhetim.vende} />
+      <GjendjaUdhetimit udhetimId={id} udhetimFillestar={udhetim} />
       {gabimPreferimi ? (
         <section className="favorite-panel" aria-labelledby="favorite-title">
           <h2 id="favorite-title">Të preferuarat</h2>

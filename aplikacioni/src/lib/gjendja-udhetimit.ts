@@ -18,6 +18,7 @@ export type GjendjaUdhetimit = {
     shoferEmri: string | null;
   };
   iKycur: boolean;
+  emriPerdoruesit: string | null;
   jamShoferi: boolean;
   kerkesaIme: KerkeseUdhetimi | null;
   kerkesat: KerkeseUdhetimi[];

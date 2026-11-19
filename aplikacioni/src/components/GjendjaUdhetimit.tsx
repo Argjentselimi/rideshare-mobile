@@ -7,7 +7,14 @@ const INTERVALI_MS = 5000;
 
 type Props = {
   udhetimId: string;
-  vendeFillestare: number;
+  udhetimFillestar: {
+    id: string;
+    nisja: string;
+    destinacioni: string;
+    ora: string;
+    vendtakimi: string;
+    vende: number;
+  };
 };
 
 type Pergjigjja = {
@@ -16,7 +23,7 @@ type Pergjigjja = {
   gjendja?: TipiGjendjes;
 };
 
-export default function GjendjaUdhetimit({ udhetimId, vendeFillestare }: Props) {
+export default function GjendjaUdhetimit({ udhetimId, udhetimFillestar }: Props) {
   const [gjendja, caktoGjendjen] = useState<TipiGjendjes | null>(null);
   const [lidhur, caktoLidhur] = useState(false);
   const [dukeVepruar, caktoDukeVepruar] = useState(false);
@@ -152,35 +159,70 @@ export default function GjendjaUdhetimit({ udhetimId, vendeFillestare }: Props) 
     }
   }
 
-  const vendet = gjendja?.udhetim.vende ?? vendeFillestare;
+  const udhetimi = gjendja?.udhetim ?? { ...udhetimFillestar, shoferEmri: null };
+  const vendet = udhetimi.vende;
   const kerkesaIme = gjendja?.kerkesaIme ?? null;
   const veprimiBllokuar = !lidhur || dukeVepruar || !gjendja || !navigatorOnline();
   const callbackUrl = encodeURIComponent(`/udhetimi/${udhetimId}`);
 
   return (
     <section className="sync-panel" aria-labelledby="sync-title">
-      <h2 id="sync-title">Gjendja e udhëtimit</h2>
-      <div className="sync-trip-summary">
-        <p><strong>Vende të lira:</strong> <span className="seat-count">{vendet}</span></p>
-        <p><strong>Shoferi:</strong> {gjendja?.udhetim.shoferEmri ?? "Pa shofer të caktuar"}</p>
+      <div className="sync-brand">
+        <div>
+          <h2 id="sync-title">RideShare</h2>
+          <p>
+            {gjendja?.iKycur
+              ? `${gjendja.emriPerdoruesit ?? "Përdoruesi"} · ${gjendja.jamShoferi ? "Shofer" : "Udhëtar"}`
+              : "Udhëtim i përbashkët"}
+          </p>
+        </div>
+        <span className="sync-live-indicator">● Live</span>
       </div>
+      <p className="sync-trip-index">UDHËTIMI {udhetimi.id}</p>
+      <article className="sync-trip-card">
+        <p className="sync-route">{udhetimi.nisja} → {udhetimi.destinacioni}</p>
+        <h3>Nisja {udhetimi.ora}</h3>
+        <p className="sync-driver-name">{udhetimi.shoferEmri ?? "Shoferi nuk është caktuar"}</p>
+        <div className="sync-trip-stats">
+          <div>
+            <span>Vende të lira</span>
+            <strong>{vendet}</strong>
+          </div>
+          <div>
+            <span>Statusi</span>
+            <strong>{vendet > 0 ? "Aktiv" : "I mbushur"}</strong>
+          </div>
+        </div>
+      </article>
 
       {!gjendja ? (
-        <p role="status">Po lexohet gjendja nga serveri…</p>
+        <section className="request-card request-empty">
+          <p className="request-label">KËRKESA</p>
+          <p className="request-status">Po lexohet…</p>
+        </section>
       ) : !gjendja.iKycur ? (
-        <p>
-          <a href={`/api/auth/signin?callbackUrl=${callbackUrl}`}>Hyr me GitHub</a> për të kërkuar ose menaxhuar vendet.
-        </p>
+        <section className="request-card request-empty">
+          <p className="request-label">KËRKESA IME</p>
+          <p className="request-status">Pa kërkesë</p>
+          <p>
+            <a href={`/api/auth/signin?callbackUrl=${callbackUrl}`}>Hyr me GitHub</a> për të kërkuar ose menaxhuar vendet.
+          </p>
+        </section>
       ) : gjendja.jamShoferi ? (
         <div className="request-list">
-          <h3>Kërkesat për udhëtimin tim</h3>
           {gjendja.kerkesat.length === 0 ? (
-            <p>Ende pa kërkesa.</p>
+            <section className="request-card request-empty">
+              <p className="request-label">KËRKESAT E UDHËTARËVE</p>
+              <p className="request-status">Pa kërkesë</p>
+              <p>Ende pa kërkesa.</p>
+            </section>
           ) : (
             gjendja.kerkesat.map((kerkesa) => (
               <article className="request-card" key={kerkesa.id}>
-                <p><strong>{kerkesa.udhetarEmri}</strong></p>
-                <p>Statusi: {kerkesa.status === "pranuar" ? "U pranua" : "Në pritje"}</p>
+                <p className="request-label">KËRKESA E {kerkesa.udhetarEmri}</p>
+                <p className={`request-status ${kerkesa.status === "pranuar" ? "is-accepted" : "is-pending"}`}>
+                  {kerkesa.status === "pranuar" ? "U pranua" : "Në pritje"}
+                </p>
                 {kerkesa.status === "ne_pritje" && (
                   <button
                     className="action"
@@ -199,15 +241,15 @@ export default function GjendjaUdhetimit({ udhetimId, vendeFillestare }: Props) 
           )}
         </div>
       ) : (
-        <div className="passenger-request">
-          <h3>Kërkesa ime</h3>
+        <section className="passenger-request request-card">
+          <p className="request-label">KËRKESA IME</p>
           {kerkesaIme ? (
-            <p className="request-status">
+            <p className={`request-status ${kerkesaIme.status === "pranuar" ? "is-accepted" : "is-pending"}`}>
               {kerkesaIme.status === "pranuar" ? "U pranua · vendi u konfirmua" : "Në pritje · kërkesa u dërgua"}
             </p>
           ) : (
             <>
-              <p>Pa kërkesë</p>
+              <p className="request-status">Pa kërkesë</p>
               <button
                 className="action"
                 type="button"
@@ -227,12 +269,13 @@ export default function GjendjaUdhetimit({ udhetimId, vendeFillestare }: Props) 
               </button>
             </>
           )}
-        </div>
+        </section>
       )}
 
-      <p className="connection-status" role="status" aria-live="polite">
-        {lidhur ? "Gjendja u lexua nga serveri · përditësim automatik çdo 5 sekonda" : "Po rilidhemi · të dhënat e shfaqura mund të jenë të vjetra"}
+      <p className={`connection-status ${lidhur ? "is-connected" : "is-reconnecting"}`} role="status" aria-live="polite">
+        {lidhur ? "Gjendja u lexua nga serveri" : "Po rilidhemi · të dhënat mund të jenë të vjetra"}
       </p>
+      <p className="polling-hint">Përditësim automatik çdo 5 sekonda</p>
       {mesazhiVeprimit && (
         <p className="action-message" role={gabimVeprimi ? "alert" : "status"} aria-live="polite">
           {mesazhiVeprimit}

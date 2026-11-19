@@ -6,6 +6,8 @@ Shtova kërkesa reale për vende në udhëtim. Udhëtari i kyçur krijon një k�
 
 Faqja e udhëtimit rilexon gjendjen nga serveri menjëherë dhe pastaj çdo 5 sekonda. Leximet nuk mbivendosen; timer-i dhe kërkesa aktive pastrohen kur largohet nga faqja. Udhëtimi dhe kërkesat lexohen në një snapshot të vetëm të databazës. Në dështim shfaqet paralajmërimi i rilidhjes dhe ruhen vlerat e fundit në ekran. Rikthimi online nis lexim të menjëhershëm. Kërkesa nuk ruhet në `localStorage`.
 
+Pamja e telefonit e paraqet udhëtimin, orën, shoferin, vendet dhe statusin në një kartë të vetme. Çdo sesion tregon rolin e vet: shoferi sheh kërkesat dhe udhëtari sheh kërkesën personale.
+
 Identiteti merret nga sesioni GitHub në server. Udhëtari sheh vetëm kërkesën e vet; listën e kërkesave e sheh vetëm shoferi i caktuar te udhëtimi. Rruga e pranimit kontrollon pronësinë në server. Tabela ka kufizim unik për çiftin udhëtim–udhëtar.
 
 ## Skema dhe përgatitja e udhëtimit prove

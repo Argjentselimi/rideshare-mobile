@@ -71,6 +71,7 @@ export async function lexoGjendjenUdhetimit(
       shoferEmri: udhetimi.shofer_emri ? String(udhetimi.shofer_emri) : null,
     },
     iKycur: Boolean(profili),
+    emriPerdoruesit: profili?.emri ?? null,
     jamShoferi,
     kerkesaIme,
     kerkesat,
