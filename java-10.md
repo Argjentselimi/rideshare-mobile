@@ -55,7 +55,6 @@ Me një kërkesë të re në pritje, vendose vetëm dritaren e udhëtarit në Of
 - Migrimi Java 10 u aplikua dhe u verifikua në Neon.
 - Udhëtimet pa shofer pronar të caktuar nuk pranojnë kërkesa; cakto pronarin e provës në Neon.
 - Dy provat me llogari të ndara dhe prova offline kërkojnë kryerje në shfletues.
-- Nuk u bë commit ose push.
 
 ## Ndihma nga AI
 
